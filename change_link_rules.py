@@ -13,7 +13,8 @@ def change_link_rules(event, context):
     wikipage = reddit.subreddit("machinelearning").wiki["config/automoderator"]
     rules = wikipage.content_md.split('---')
 
-    link_rule = """\r\n    type: link submission\r\n    ~domain (ends-with): ".edu"\r\n    ~domain: ["arxiv.org", "openreview.net"]\r\n    action: remove\r\n    comment: Your post was automatically removed, please read the [rules](https://www.reddit.com/r/MachineLearning/about/rules/). **The moderators will not respond to questions regarding this removal unless you suggest which rule you most likely broke.** If you have a beginner related question, visit  /r/MLQuestions or /r/LearnMachineLearning.\r\n"""
+    link_rule = """\r\n    type: link submission\r\n    ~domain (ends-with): ".edu"\r\n    ~domain: ["arxiv.org", "openreview.net"]\r\n    action: remove\r\n    comment: Your post was automatically removed for being a link post on the weekday, please read [rule 5](https://www.reddit.com/r/MachineLearning/about/rules/). **The moderators will not respond to questions regarding this removal unless you suggest which rule you most likely broke.** If you have a beginner related question, visit  /r/MLQuestions or /r/LearnMachineLearning.\r\n"""
+    print(rules)
 
     if event['add_rule'] == True and link_rule not in rules:
         rules.insert(1, link_rule)
@@ -27,3 +28,4 @@ def change_link_rules(event, context):
         'statusCode': 200,
         'body': 'added rule' if event['add_rule'] else 'removed rule'
     }
+
