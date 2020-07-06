@@ -18,7 +18,7 @@ def change_link_rules(event, context):
 
     if event['add_rule'] == True and link_rule not in rules:
         rules.insert(1, link_rule)
-    else if event['add_rule'] == False and link_rule in rules:
+    elif event['add_rule'] == False and link_rule in rules:
         rules.remove(link_rule)
     else:
         assert(false)
